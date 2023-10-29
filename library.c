@@ -204,37 +204,31 @@ void Debito (Cadastro *pessoas, int *usados, ExtratoCliente *grupo[]){
 
 }
 void Deposito (Cadastro *pessoas, int *usados) {
-    char cpf[11];
+    char cpf[11]; //cria a variavel cpf para a verificação
     int i;
-    printf("Digite seu cpf para deposito: ");
-    scanf("%s",cpf);
+    printf("Digite seu cpf para deposito: ");//pede o cpf para fazer o deposito
+    scanf("%s",cpf);//guarda o cpf na variavel
     //int exec = 1;
-    for (i = 0; i < *usados + 1; ++i) {
-        char comparativo[11];
-        strcpy(comparativo,pessoas[i].cpf);
-        int resultado = stricmp(cpf, comparativo);
-        //printf("exec %d\n",exec);
-        //exec++;
-       // for (int j = 0; j < 11; ++j) {
-            //printf("\n");
-           // int valor = cpf[j]-comparativo[j];
-           // printf("%d\n",valor);
-       // }
-        if (resultado == 0) {
+    for (i = 0; i < *usados + 1; ++i) { //percorre o cpfs
+        char comparativo[11];//variavel para receber o cpf vindo da struct
+        strcpy(comparativo,pessoas[i].cpf);//paga o cpf escolhido e coloca na variavel comparativo para que na proxima operação seja possivel realizar a comparação
+        int resultado = stricmp(cpf, comparativo); //faz com que a variavel resutado realize a comparacao entre o cpf digitado e o cpf comparativo
+
+        if (resultado == 0) {//se existir, o loop quebra e para para a proxima operação
             break;
-        } else if (resultado != 0 && i > *usados) {
+        } else if (resultado != 0 && i > *usados) {//caso contrario, o programa printa a proxima mensagem e retorna o loop do inicio
             printf("CPF nao encontrado!\n");
             return;
-        } else {
+        } else {//caso aconteça qualquer outra operação diferente das outras, o programa volta para o menu
             continue;
         }
 
     }
-    printf("Insira o valor a ser depositado: \n");
+    printf("Insira o valor a ser depositado: \n");//pede para inserir o valor a ser depositado
     double valor;
-    scanf("%lf",&valor);
-    pessoas[i].saldo = pessoas[i].saldo + valor;
-    printf("Seu saldo atual é %.2lf\n", pessoas[i].saldo);
+    scanf("%lf",&valor);//guarda o valor digitado
+    pessoas[i].saldo = pessoas[i].saldo + valor; //realiza o deposito, pegando o valor da variavel saldo da struct e somando com a variavel valor
+    printf("Seu saldo atual é %.2lf\n", pessoas[i].saldo);//printa o saldo da conta
 
 }
 void Extrato (Cadastro *pessoas ,int *usados, ExtratoCliente *grupo) {
