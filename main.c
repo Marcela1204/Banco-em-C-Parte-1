@@ -23,15 +23,15 @@ int main() {
     scanf("%d", &valor);
 
     if (valor == 1) {
-        NovoCliente(&cliente,usados);
+        NovoCliente(&cliente,&usados);
     }
 
     else if (valor == 2){
-        ApagarCliente(&cliente);
+        ApagarCliente(&cliente,&usados);
     }
 
     else if (valor == 3){
-
+        ListarClientes(&cliente,&usados);
     }
 
     else if (valor == 4){
