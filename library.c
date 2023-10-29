@@ -136,10 +136,10 @@ void ApagarCliente (Cadastro *pessoas, int *usados, ExtratoCliente *grupo){
 }
 void ListarClientes (Cadastro *pessoas, int *usados){
     printf("\n=========================================================================\n");
-    for (int i = 0; i < *usados; ++i) {
-        printf("Usuario %d:\n",i+1);
-        printf("Nome: %s\n",pessoas[i].nome);
-        printf("CPF:%s\n",pessoas[i].cpf);
+    for (int i = 0; i < *usados; ++i) { //vai fazer o loop de todos os usuarios cadastrados pela variavel usados
+        printf("Usuario %d:\n",i+1); //printa o numero do usuario
+        printf("Nome: %s\n",pessoas[i].nome); //printa o nome do usuario armazenado
+        printf("CPF:%s\n",pessoas[i].cpf); //printa o cpf do usuario armazenado
         printf("-------------------------------------------------------------------------\n");
     }
     printf("=========================================================================\n\n");
