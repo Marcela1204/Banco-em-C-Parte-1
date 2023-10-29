@@ -39,14 +39,14 @@ int main() {
         escrita(&cliente, &usados);//anota tudo o que aconteceu no programa
     }
 
-    else if (valor == 4){
-        Debito(&cliente, &usados, &grupo);
-        escrita(&cliente, &usados);
+    else if (valor == 4){//se o valor da operação for igual a 4
+        Debito(&cliente, &usados, &grupo);//vai para função Debito
+        escrita(&cliente, &usados);//anota tudo o que aconteceu no programa
     }
 
-    else if (valor == 5){
-        Deposito(&cliente,&usados);
-        escrita(&cliente, &usados);
+    else if (valor == 5){//se o valor da operação for igual a 5
+        Deposito(&cliente,&usados);//vai para função Deposito
+        escrita(&cliente, &usados);//anota tudo o que aconteceu no programa
 
     }
 
