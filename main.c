@@ -35,10 +35,11 @@ int main() {
     }
 
     else if (valor == 4){
-
+        Debito(&cliente, &usados);
     }
 
     else if (valor == 5){
+        Deposito(&cliente,&usados);
 
     }
 

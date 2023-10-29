@@ -8,7 +8,7 @@
 void NovoCliente (Cadastro *pessoas,int *usados){
     while (1){
         char mensagem[4];
-        printf("Quer continuar a operacao: (Sim ou Nao) R: ");
+        printf("\nQuer continuar a operacao: (Sim ou Nao) R: \n");
         scanf("%s",mensagem);
         int positivo = stricmp(mensagem,"Sim");
         if (positivo == 0) {
@@ -16,10 +16,28 @@ void NovoCliente (Cadastro *pessoas,int *usados){
             scanf("%s", pessoas[*usados].nome);
             printf("Digite seu CPF: ");
             scanf("%s", pessoas[*usados].cpf);
-            printf("Digite o tipo da sua conta: ");
-            scanf("%d", &pessoas[*usados].tipo);
+            while (1){
+            printf("Digite o tipo da sua conta: \n"
+                   "1 - Comum;\n"
+                   "2 - Plus\n"
+                   "R: ");
+            int tipotemp;
+            scanf("%d", &tipotemp);
+            if (tipotemp == 2){
+                pessoas[*usados].taxa = 0.03;
+                pessoas[*usados].minimo = (-5000);
+                break;
+            } else if(tipotemp == 1){
+                pessoas[*usados].taxa = 0.05;
+                pessoas[*usados].minimo = (-3000);
+                break;
+            }else{
+                printf("Valor incorreto!\n");
+                continue;
+            }
+            }
             printf("Digite um valor inicial para colocar na conta: ");
-            scanf("%lf", &pessoas[*usados].valorinicial);
+            scanf("%lf", &pessoas[*usados].saldo);
             char senhaconfirma[20];
             char senhatemporaria[20];
             printf("Digite sua senha: ");
@@ -29,7 +47,7 @@ void NovoCliente (Cadastro *pessoas,int *usados){
             int comparacao = stricmp(senhatemporaria,senhaconfirma);
             if (comparacao == 0){
                 strcpy(pessoas[*usados].senha,senhatemporaria);
-                printf("Conta criada com sucesso!\n\n");
+                printf("Conta criada com sucesso!\n");
                 *usados+=1;
             } else{
                 printf("Senha incorreta! Realize a operacao novamente!\n");
@@ -52,7 +70,7 @@ void ApagarCliente (Cadastro *pessoas, int *usados){
         if(resultado == 0){
             break;
         } else if(resultado != 0 && i>*usados){
-            printf("cpf nao encontrado");
+            printf("CPF nao encontrado!\n");
             return;
         }else{
             continue;
@@ -80,7 +98,7 @@ void ApagarCliente (Cadastro *pessoas, int *usados){
             break;
     }
         }if(j==1001){
-        printf("CPF nao encontrado!");
+        printf("CPF nao encontrado!1\n");
 
     }else{
         for (int h = j; h < 999; ++h) {
@@ -101,16 +119,92 @@ void ListarClientes (Cadastro *pessoas, int *usados){
         printf("Usuario %d:\n",i+1);
         printf("Nome: %s\n",pessoas[i].nome);
         printf("CPF:%s\n",pessoas[i].cpf);
-        printf("-----------------------------------------------------------------------\n");
+        printf("-------------------------------------------------------------------------\n");
     }
     printf("=========================================================================\n\n");
 
 }
 
-void Debito (Cadastro *){
+void Debito (Cadastro *pessoas, int *usados){
+    char cpf[11];
+    while (1) {
+        char mensagem[4];
+        printf("\n");
+        printf("Quer continuar a operacao: (Sim ou Nao) R: \n");
+        scanf("%s", mensagem);
+        int positivo = stricmp(mensagem, "Sim");
+        if (positivo == 0) {
+            printf("Digite seu CPF: ");
+            scanf("%s",cpf);
+            int i;
+            for (i = 0; i <= *usados+1; ++i) {
+                int resultado = stricmp(cpf,pessoas[i].cpf);
+                if(resultado == 0){
+                    break;
+                } else if(resultado != 0 && i>*usados){
+                    printf("CPF nao encontrado!\n");
+                    return;
+                }else{
+                    continue;//Isso funciona? O código chega nesse cara? SIM
+                }
+            }
+            while (1){
+                char senhaconfirma[20];
+                strcpy(senhaconfirma,pessoas[i].senha);
+                char senhatemporaria[20];
+                printf("Digite sua senha: ");
+                scanf("%s", senhatemporaria);
+                int comparacao = stricmp(senhatemporaria,senhaconfirma);
+                if (comparacao == 0){
+                    break;
+                } else {
+                    printf("Senha incorreta! Realize a operacao novamente!\n");
+                    continue;
+                }
+            }
+
+            double valordigitado;
+            printf("Quanto deseja debitar da conta? R: ");
+            scanf("%lf",&valordigitado);
+            if (pessoas[*usados].minimo <= pessoas[*usados].saldo - (pessoas[*usados].taxa * valordigitado+valordigitado)){
+                pessoas[*usados].saldo = pessoas[*usados].saldo - (pessoas[*usados].taxa * valordigitado)-valordigitado;
+                printf("Seu saldo atual eh: %lf", pessoas[*usados].saldo);
+            } else{
+                printf("Valor do debito superior ao valor disponivel na conta!", pessoas[*usados].saldo);
+            }
+
+
+
+
+        } else{
+            break;
+        }
+    }
 
 }
-void Deposito (Cadastro *){}
+void Deposito (Cadastro *pessoas, int *usados) {
+    char cpf[11];
+    int i;
+    printf("Digite seu cpf para deposito");
+    scanf("%s",cpf);
+    for (i = 0; i <= *usados + 1; ++i) {
+        int resultado = stricmp(cpf, pessoas[i].cpf);
+        if (resultado == 0) {
+            break;
+        } else if (resultado != 0 && i > *usados) {
+            printf("CPF nao encontrado!\n");
+            return;
+        } else {
+            continue;
+        }
+
+    }
+    printf("insira o valor a ser depositado");
+    double valor;
+    scanf("%lf",&valor);
+    pessoas[i].saldo+=valor;
+
+}
 void Extrato (Cadastro *) {}
 void Transfarencia (Cadastro *) {}
 void DebitoAutomatico (Cadastro *) {}

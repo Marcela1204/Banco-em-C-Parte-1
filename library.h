@@ -11,26 +11,18 @@ typedef struct {
     char nome[100];
     char cpf[11];
     int tipo;
-    double valorinicial;
+    double saldo;
     char senha[20];
 
     double taxa;
     double minimo;
-    double saldo;
-
-
-    char data[20];
-
-
-    char servico[100];
-    double debito;
 }Cadastro;
 
 void NovoCliente (Cadastro *,int *);
 void ApagarCliente (Cadastro *,int *);
 void ListarClientes (Cadastro *, int *);
-void Debito (Cadastro *);
-void Deposito (Cadastro *);
+void Debito (Cadastro *, int *);
+void Deposito (Cadastro *,int *);
 void Extrato (Cadastro *);
 void Transfarencia (Cadastro *);
 void DebitoAutomatico (Cadastro *);
