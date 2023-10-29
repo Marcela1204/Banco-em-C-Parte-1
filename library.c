@@ -147,61 +147,57 @@ void ListarClientes (Cadastro *pessoas, int *usados){
 }
 
 void Debito (Cadastro *pessoas, int *usados, ExtratoCliente *grupo[]){
-    char cpf[11];
-    while (1) {
-        char mensagem[4];
+    char cpf[11]; //cria a variavel cpf para a verificação
+    while (1) { //abre o loop de verificacao
+        char mensagem[4]; //cria a variavel para guardar resposta da proxima pergunta
         printf("\n");
-        printf("Quer continuar a operacao: (Sim ou Nao) R: \n");
-        scanf("%s", mensagem);
-        int positivo = stricmp(mensagem, "Sim");
-        if (positivo == 0) {
-            printf("Digite seu CPF: ");
-            scanf("%s",cpf);
+        printf("Quer continuar a operacao: (Sim ou Nao) R: \n");//pergunta se a pessoa quer continuar
+        scanf("%s", mensagem); //recebe a mensagem
+        int positivo = stricmp(mensagem, "Sim"); //compara o que tiver na variavel com a palavra sim
+        if (positivo == 0) { //se for igual, realiza a operação de verificação do cpf
+            printf("Digite seu CPF: "); //pede para digitar o cpf
+            scanf("%s",cpf);//guarda na variavel cpf
             int i;
-            for (i = 0; i <= *usados+1; ++i) {
-                int resultado = stricmp(cpf,pessoas[i].cpf);
-                if(resultado == 0){
+            for (i = 0; i <= *usados+1; ++i) {//verifica se o cpf existe pela variavel usados
+                int resultado = stricmp(cpf,pessoas[i].cpf); //compara o cpf digitado com o cpfs armazenados na struct
+                if(resultado == 0){//se a comparação for verdadeira, o loop se encerra e vai para proxima operação
                     break;
-                } else if(resultado != 0 && i>*usados){
+                } else if(resultado != 0 && i>*usados){//caso contrario, o programa printa a proxima mensagem e retorna o loop do inicio
                     printf("CPF nao encontrado!\n");
                     return;
-                }else{
+                }else{//caso aconteça qualquer outra operação diferente das outras, o programa volta para o menu
                     continue;
                 }
             }
-            while (1){
-                char senhaconfirma[20];
-                strcpy(senhaconfirma,pessoas[i].senha);
-                char senhatemporaria[20];
-                printf("Digite sua senha: ");
-                scanf("%s", senhatemporaria);
-                int comparacao = stricmp(senhatemporaria,senhaconfirma);
-                if (comparacao == 0){
+            while (1){//loop de confirmação de senha
+                char senhaconfirma[20];//variavel para guardar a primeira senha digitada
+                strcpy(senhaconfirma,pessoas[i].senha);//função que guarda a informação de senha do cpf digitado na primeira senha digitada
+                char senhatemporaria[20];//variavel para guardar a segunda senha digitada
+                printf("Digite sua senha: ");//pede para digitar a segunda senha
+                scanf("%s", senhatemporaria);//guarda a segunda senha na variavel
+                int comparacao = stricmp(senhatemporaria,senhaconfirma);//compara se a primeira senha é igual a segunda
+                if (comparacao == 0){//se for igual o loop quebra e vai para proxima operação
                     break;
-                } else {
+                } else {//caso contrario, printa a proxima mensagem e volta o programa para o menu
                     printf("Senha incorreta! Realize a operacao novamente!\n");
                     continue;
                 }
             }
 
-            double valordigitado;
-            printf("Quanto deseja debitar da conta? R: ");
-            scanf("%lf",&valordigitado);
-            if (pessoas[i].minimo <= pessoas[i].saldo - ((pessoas[i].taxa * valordigitado)+valordigitado)){
-                pessoas[i].saldo = pessoas[i].saldo - (pessoas[i].taxa * valordigitado)-valordigitado;
-                printf("Seu saldo atual eh: %.2lf", pessoas[i].saldo);
-                //char tmpsaldo[500];
-                //sprintf(tmpsaldo,"Debito : %.2lf", pessoas[i].saldo);
-                //strcpy(grupo[i][pessoas[i].transacao].info,tmpsaldo);
-                //pessoas[i].transacao++;
-            } else{
+            double valordigitado;//varialvel para receber o valor a ser debitado
+            printf("Quanto deseja debitar da conta? R: ");//pede o valor a ser debitado
+            scanf("%lf",&valordigitado);//guarda o valor na variavel
+            if (pessoas[i].minimo <= pessoas[i].saldo - ((pessoas[i].taxa * valordigitado)+valordigitado)){ //se o minimo disponivel na conta for menor que o saldo da conta - a operação de taxa (do cpf digitado) sob o valor digitado
+                pessoas[i].saldo = pessoas[i].saldo - (pessoas[i].taxa * valordigitado)-valordigitado; //o saldo muda e é realizada a operação de debito sob a taxa da conta do cpf digitado
+                printf("Seu saldo atual eh: %.2lf", pessoas[i].saldo); //printa o saldo
+            } else{//caso contrario, informa que a operação nao pode ser realizada e mostra o saldo
                 printf("Valor do debito superior ao valor disponivel na conta!", pessoas[i].saldo);
             }
 
 
 
 
-        } else{
+        } else{//caso o usuario nao queira continuar a operação, o loop se encerra e volta para o menu
             break;
         }
     }
