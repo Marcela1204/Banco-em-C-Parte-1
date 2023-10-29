@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include "library.h"
 
+Cadastro cliente[1000];
+int usados = 0;
+
 int main() {
     int valor;
 
@@ -20,11 +23,11 @@ int main() {
     scanf("%d", &valor);
 
     if (valor == 1) {
-
+        NovoCliente(&cliente,usados);
     }
 
     else if (valor == 2){
-        printf("teste\n");
+        ApagarCliente(&cliente);
     }
 
     else if (valor == 3){
