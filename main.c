@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include "library.h"
 
-Cadastro cliente[1000];
-ExtratoCliente grupo[1000][1000];
-int usados;
+Cadastro cliente[1000];//struct de clientes
+ExtratoCliente grupo[1000][1000];//struct de extrato
+int usados;//variavel para percorrer os cliente
 
 
 int main() {
@@ -34,9 +34,9 @@ int main() {
         escrita(&cliente, &usados);//anota tudo o que aconteceu no programa
     }
 
-    else if (valor == 3){
-        ListarClientes(&cliente,&usados);
-        escrita(&cliente, &usados);
+    else if (valor == 3){//se o valor da operação for igual a 3
+        ListarClientes(&cliente,&usados);//vai para função Listar clientes
+        escrita(&cliente, &usados);//anota tudo o que aconteceu no programa
     }
 
     else if (valor == 4){
