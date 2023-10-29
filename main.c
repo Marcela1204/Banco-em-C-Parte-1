@@ -3,6 +3,7 @@
 #include "library.h"
 
 Cadastro cliente[1000];
+ExtratoCliente grupo[1000][1000];
 int usados = 0;
 
 int main() {
@@ -17,17 +18,16 @@ int main() {
            "5- Deposito;\n"
            "6- Extrato;\n"
            "7- Transferencia entre contas;\n"
-           "8- Debido automatico;\n"
-           "9- Sair;\n");
+           "0- Sair;\n");
     printf("Qual operacao deseja realizar?\n");
     scanf("%d", &valor);
 
     if (valor == 1) {
-        NovoCliente(&cliente,&usados);
+        NovoCliente(&cliente,&usados, &grupo);
     }
 
     else if (valor == 2){
-        ApagarCliente(&cliente,&usados);
+        ApagarCliente(&cliente,&usados, &grupo);
     }
 
     else if (valor == 3){
@@ -35,7 +35,7 @@ int main() {
     }
 
     else if (valor == 4){
-        Debito(&cliente, &usados);
+        Debito(&cliente, &usados, &grupo);
     }
 
     else if (valor == 5){
@@ -44,6 +44,7 @@ int main() {
     }
 
     else if (valor == 6){
+        Extrato(&cliente,&usados, &grupo);
 
     }
 
@@ -51,11 +52,7 @@ int main() {
 
     }
 
-    else if (valor == 8){
-
-    }
-
-    else if (valor == 9){
+    else if (valor == 0){
         break;
     }
 
