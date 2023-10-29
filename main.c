@@ -50,20 +50,20 @@ int main() {
 
     }
 
-    else if (valor == 6){
-        Extrato(&cliente,&usados, &grupo);
-        escrita(&cliente, &usados);
+    else if (valor == 6){//se o valor da operação for igual a 6
+        Extrato(&cliente,&usados, &grupo);//vai para função Extrato
+        escrita(&cliente, &usados);//anota tudo o que aconteceu no programa
 
     }
 
-    else if (valor == 7){
-        Transferencia(&cliente,&usados);
-        escrita(&cliente, &usados);
+    else if (valor == 7){//se o valor da operação for igual a 7
+        Transferencia(&cliente,&usados);//vai para função Transferencia
+        escrita(&cliente, &usados);//anota tudo o que aconteceu no programa
 
     }
 
-    else if (valor == 0){
-        break;
+    else if (valor == 0){//se o valor da operação for igual a 0
+        break;//o programa se encerra
     }
 
     }
