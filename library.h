@@ -7,7 +7,7 @@
 
 #endif //PROJETO2_LIBRARY_H
 
-typedef struct {
+typedef struct {//Struct de cadastro dos clientes
     char nome[100];
     char cpf[11];
     double saldo;
@@ -17,14 +17,16 @@ typedef struct {
     int transacao;
 }Cadastro;
 
-typedef struct {
+typedef struct {//struct do extrato do cliente
     char info[1000];
 }ExtratoCliente;
 
-void NovoCliente (Cadastro *,int *, ExtratoCliente *[]);
-void ApagarCliente (Cadastro *,int *, ExtratoCliente *);
-void ListarClientes (Cadastro *, int *);
-void Debito (Cadastro *, int *, ExtratoCliente *[]);
-void Deposito (Cadastro *,int *);
-void Extrato (Cadastro *, int *, ExtratoCliente *);
-void Transferencia (Cadastro *, int *);
+void NovoCliente (Cadastro *,int *, ExtratoCliente *[]);//Função Novo Cliente
+void ApagarCliente (Cadastro *,int *, ExtratoCliente *);//Função Apagar cliente
+void ListarClientes (Cadastro *, int *);// Função listar clientes
+void Debito (Cadastro *, int *, ExtratoCliente *[]);// Função de débito
+void Deposito (Cadastro *,int *);//Função de deposito
+void Extrato (Cadastro *, int *, ExtratoCliente *);//Função de extrato
+void Transferencia (Cadastro *, int *);//Função de transferencia
+void escrita(Cadastro *, int *);//Função de escrita do arquivo
+void leitura(Cadastro *pessoas, int *);//Função de leitura do arquivo
