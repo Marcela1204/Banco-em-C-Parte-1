@@ -272,69 +272,67 @@ void Extrato (Cadastro *pessoas ,int *usados, ExtratoCliente *grupo) {
 
         }
     }
-
+}
 
 
 }
 
 
 void Transferencia (Cadastro *pessoas, int *usados){
-    char cpf[11];
-    char cpf2[11];
+    char cpf[11];//variavel que guarda o cpf de origem
+    char cpf2[11];//variavel que guarda o cpf de destino
     int i;
     int j;
-    printf("Digite seu cpf de origem: ");
-    scanf("%s",cpf);
+    printf("Digite seu cpf de origem: ");//pede o cpf de origem
+    scanf("%s",cpf);//guarda o cpf digitado na variavel cpf
     //int exec = 1;
-    for (i = 0; i < *usados + 1; ++i) {
-        char comparativo[11];
-        strcpy(comparativo, pessoas[i].cpf);
-        int resultado = stricmp(cpf, comparativo);
-        if (resultado == 0) {
+    for (i = 0; i < *usados + 1; ++i) {//abre o loop para verificação do cpf
+        char comparativo[11];//variavel que vai receber o cpf de comparação
+        strcpy(comparativo, pessoas[i].cpf); //coloca o cpf vindo da struct na variavel comparativo
+        int resultado = stricmp(cpf, comparativo);//compara o cpf de comparativo com o cpf digitado
+        if (resultado == 0) {//se existir, o loop quebra e para para a proxima operação
             break;
-        } else if (resultado != 0 && i > *usados) {
+        } else if (resultado != 0 && i > *usados) {//caso contrario, o programa printa a proxima mensagem e retorna o loop do inicio
             printf("CPF nao encontrado!\n");
             return;
-        } else {
+        } else {//caso aconteça qualquer outra operação diferente das outras, o programa volta para o menu
             continue;
         }
     }
-    while (1){
-        char senhaconfirma[20];
-        strcpy(senhaconfirma,pessoas[i].senha);
-        char senhatemporaria[20];
-        printf("Digite sua senha: ");
-        scanf("%s", senhatemporaria);
-        int comparacao = stricmp(senhatemporaria,senhaconfirma);
-        if (comparacao == 0){
+    while (1){//loop de confirmação de senha
+        char senhaconfirma[20];//variavel para guardar a primeira senha digitada
+        strcpy(senhaconfirma,pessoas[i].senha);//função que guarda a informação de senha do cpf digitado na primeira senha digitada
+        char senhatemporaria[20];//variavel para guardar a segunda senha digitada
+        printf("Digite sua senha: ");//pede a senha
+        scanf("%s", senhatemporaria);//guarda a senha digitada na variavel
+        int comparacao = stricmp(senhatemporaria,senhaconfirma);//compara se a primeira senha é igual a segunda
+        if (comparacao == 0){//se for igual, o loop quebra e passa para proxima operação
             break;
-        } else {
+        } else {//caso contrario, printa a proxima mensagem e vai para o menu
             printf("Senha incorreta! Realize a operacao novamente!\n");
             continue;
         }
     }
-        printf("Digite seu cpf de destino: ");
-        scanf("%s",cpf2);
-        for (j = 0; j < *usados + 1; ++j) {
-            char comparativo[11];
-            strcpy(comparativo, pessoas[j].cpf);
-            int resultado = stricmp(cpf2, comparativo);
-            if (resultado == 0) {
+        printf("Digite seu CPF de destino: ");//pede o cpf para destino da transferencia
+        scanf("%s",cpf2);//recebe o cpf
+        for (j = 0; j < *usados + 1; ++j) {//abre o loop para verificação do cpf
+            char comparativo[11];//variavel que vai receber o cpf de comparação
+            strcpy(comparativo, pessoas[j].cpf);//coloca o cpf vindo da struct na variavel comparativo
+            int resultado = stricmp(cpf2, comparativo);//compara o cpf de comparativo com o cpf digitado
+            if (resultado == 0) {//se existir, o loop quebra e para para a proxima operação
                 break;
-            } else if (resultado != 0 && j > *usados) {
+            } else if (resultado != 0 && j > *usados) {//caso contrario, o programa printa a proxima mensagem e retorna o loop do inicio
                 printf("CPF nao encontrado!\n");
                 return;
-            } else {
+            } else {//caso aconteça qualquer outra operação diferente das outras, o programa volta para o menu
                 continue;
             }
         }
-        double transferencia;
-        printf("quanto deseja transferir?\n");
-        scanf("%lf", &transferencia);
-        pessoas[i].saldo-=transferencia;
-        pessoas[j].saldo+=transferencia;
-    printf("o saldo atual da conta de origem é %.2lf\n", pessoas[i].saldo);
-
-
+        double transferencia;//variavel para receber o valor da transferencia
+        printf("quanto deseja transferir? \n");//pede o valor da transferencia
+        scanf("%lf", &transferencia);//recebe o valor da tranferencia
+        pessoas[i].saldo-=transferencia;//retira do saldo do cpf de origem o valor da tranferencia
+        pessoas[j].saldo+=transferencia;//adiciona do saldo do cpf de destino o valor da tranferencia
+    printf("O saldo atual da conta de origem é %.2lf\n", pessoas[i].saldo);//printa o saldo do cpf de destino
 
 }
