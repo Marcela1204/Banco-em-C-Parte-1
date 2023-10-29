@@ -2,12 +2,14 @@
 #include <stdio.h>
 #include "library.h"
 
-Cadastro cliente[1000];//struct de clientes
-ExtratoCliente grupo[1000][1000];//struct de extrato
-int usados;//variavel para percorrer os cliente
+Cadastro cliente[1000];
+ExtratoCliente grupo[1000][1000];
+int usados;
 
 
 int main() {
+    leitura(&cliente, &usados); //leitura do arquivo
+    escrita(&cliente, &usados);//escrita do arquivo
     int valor;
     while (1){//loop de menu
     printf("Digite o valor da operacao a ser realizada:\n");//menu de destino
@@ -24,37 +26,44 @@ int main() {
 
     if (valor == 1) {//se o valor da operação for igual a 1
         NovoCliente(&cliente,&usados, &grupo); //vai para função Novo cliente
+        escrita(&cliente, &usados); //anota tudo o que aconteceu no programa
     }
 
     else if (valor == 2){//se o valor da operação for igual a 2
-        
+        ApagarCliente(&cliente,&usados, &grupo);//vai para função Apagar Cliente
+        escrita(&cliente, &usados);//anota tudo o que aconteceu no programa
     }
 
-    else if (valor == 3){//se o valor da operação for igual a 3
-        
+    else if (valor == 3){
+        ListarClientes(&cliente,&usados);
+        escrita(&cliente, &usados);
     }
 
-    else if (valor == 4){//se o valor da operação for igual a 4
-        
+    else if (valor == 4){
+        Debito(&cliente, &usados, &grupo);
+        escrita(&cliente, &usados);
     }
 
-    else if (valor == 5){//se o valor da operação for igual a 5
-        
-
-    }
-
-    else if (valor == 6){//se o valor da operação for igual a 6
-        
-
-    }
-
-    else if (valor == 7){//se o valor da operação for igual a 7
-        
+    else if (valor == 5){
+        Deposito(&cliente,&usados);
+        escrita(&cliente, &usados);
 
     }
 
-    else if (valor == 0){//se o valor da operação for igual a 0
-        break;//o programa se encerra
+    else if (valor == 6){
+        Extrato(&cliente,&usados, &grupo);
+        escrita(&cliente, &usados);
+
+    }
+
+    else if (valor == 7){
+        Transferencia(&cliente,&usados);
+        escrita(&cliente, &usados);
+
+    }
+
+    else if (valor == 0){
+        break;
     }
 
     }
