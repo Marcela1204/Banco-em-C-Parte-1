@@ -26,9 +26,9 @@ typedef struct {
     double debito;
 }Cadastro;
 
-void NovoCliente (Cadastro *,int );
-void ApagarCliente (Cadastro *);
-void ListarClientes (Cadastro *);
+void NovoCliente (Cadastro *,int *);
+void ApagarCliente (Cadastro *,int *);
+void ListarClientes (Cadastro *, int *);
 void Debito (Cadastro *);
 void Deposito (Cadastro *);
 void Extrato (Cadastro *);
